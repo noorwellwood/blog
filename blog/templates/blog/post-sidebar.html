@@ -1,0 +1,68 @@
+{% load static %}
+<!--自我介绍开始-->
+<div style="text-align:center;">
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+    <p style="text-align:center;display:inline-block;vertical-align:middle;">关于作者</p>
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+</div>
+<div style="text-align:center;">
+    <img src="{% static 'blog/img/boy-guitar.jpg' %}" style="width:200px;height:200px;border-radius:230px;"/>
+</div>
+<p class="pt-3"><strong>我是谁</strong>: Call me <strong>'Noodles'</strong>!</p>
+<p><strong>我喜欢啥：</strong>编程，吉他，都玩得转。偶尔研究美食，小说电影一个不落。</p>
+<p><strong>个性签名：</strong>曾经喜欢面条，也曾经喜欢吃素，不过到头来，还是发现粥和肉是绝配</p>
+<p><strong>联系我：<a href="https://github.com/noorwellwood" target="_blank" style="text-decoration:none;">github链接，欢迎留言</a></strong></p>
+<hr />
+<!--自我介绍结束-->
+
+<!--最新文章开始-->
+<div style="text-align:center;">
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+    <p style="text-align:center;display:inline-block;vertical-align:middle;">最新文章</p>
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+</div>
+{% for post_new in post_news %}
+<div class="shadow-sm p-3 mb-5 bg-white rounded my-0 {% if forloop.counter == 1 %}{% else %}my-1{% endif %}">
+    <div class="d-block text-truncate" style="max-width: 250px;">
+        <span style="font-size:15px;"><strong><a href="{{ post.get_absolute_url }}" style="text-decoration:none;">{{ post_new.title }}<a></a></strong></span>
+    </div>
+    <div class="d-block text-truncate clearfix my-1" style="max-width: 250px;">
+        {% for tag in post_new.tags.all %}
+        <span class="badge badge-primary">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    <div class="d-block text-truncate mt-2" style="max-width:250px;">
+        <span class="" style="font-size:10px;">分类：{{ post_new.slug }}</span>
+        <span class="mx-3" style="font-size:10px;">阅读量：{{ post_new.total_views }}次</span>
+    </div>
+    <p style="font-size:10px;">日期：{{ post_new.update }}</p>
+</div>
+<hr class="" style="margin-top:-30px;"/>
+{% endfor %}
+<!--最新文章结束-->
+
+<!--最热文章开始-->
+<div style="text-align:center;">
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+    <p style="text-align:center;display:inline-block;vertical-align:middle;">点击排行</p>
+    <hr class="pb-2" style="display:inline-block;width:80px;vertical-align:middle;"/>
+</div>
+{% for post_range in post_ranges %}
+<div class="shadow-sm p-3 mb-5 bg-white rounded my-0 {% if forloop.counter == 1 %}{% else %}my-1{% endif %}">
+    <div class="d-block text-truncate" style="max-width: 250px;">
+        <span style="font-size:15px;"><strong><a href="{{ post.get_absolute_url }}" style="text-decoration:none;">{{ post_range.title }}</a></strong></span>
+    </div>
+    <div class="d-block text-truncate clearfix my-1" style="max-width: 250px;">
+        {% for tag in post_range.tags.all %}
+        <span class="badge badge-primary">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    <div class="d-block text-truncate mt-2" style="max-width:250px;">
+        <span class="" style="font-size:10px;">分类：{{ post_range.slug }}</span>
+        <span class="mx-3" style="font-size:10px;">阅读量：{{ post_range.total_views }}次</span>
+    </div>
+    <p style="font-size:10px;">日期：{{ post_range.update }}</p>
+</div>
+<hr class="" style="margin-top:-30px;"/>
+{% endfor %}
+<!--最热文章结束-->

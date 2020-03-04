@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block showpage %}
+<div class="shadow-sm p-3 mb-5 bg-white rounded" style="height:50px;vertical-align:middle;">
+    <span>首页>></span>
+    <span>{{ post.slug }}>></span>
+    <span style="color:gray">{{ post.title }}</span>
+</div>
+<div class="shadow-sm p-3 mb-5 bg-white rounded" style="margin-top:-45px;">
+    <h4 class="text-center"><strong>{{ post.title }}</strong></h4>
+    <hr class="mb-2 mt-3"/>
+    <div class="text-center" style="">
+    <span class="mx-3" style="font-size:13px;">分类：{{ post.slug }}</span>
+    <span class="mx-3" style="font-size:13px;">日期：{{ post.update }}</span>
+    <span class="mx-3" style="font-size:13px;">阅读：{{ post.total_views }}</span>
+    </div>
+    <p>{{ post.body|safe }}</p>
+</div>
+{% endblock %}
+{% block page %}
+{% endblock %}
+

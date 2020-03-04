@@ -1,0 +1,140 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'blog/img/Guitar.ico' %}" />
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+<!-- 导航栏开始 -->
+<div class="container fixed-top" >
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#d4edf4;">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav font-weight-bold">
+              <li class="nav-item mx-0">
+                <a class="nav-link" href="{% url 'blog:post_home' %}">首页 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  编程
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Python' %}">Python</a>
+                    <a class="dropdown-item" href="{% url 'blog:post_list' slug='编程-其他' %}">编程-其他</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Web后端
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Django' %}">Django</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Flask' %}">Flask</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='后端-其他' %}">后端-其他</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='后端-工具' %}">后端-工具</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Web前端
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Html\css' %}">Html/css</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='js\jquery' %}">js/jquery</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='vue.js' %}">vue.js</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='前端-工具' %}">前端-工具</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  数据库
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='SQL' %}">SQL</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='MySQL' %}">MySQL</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='NoSQL' %}">NoSQL</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Git/Linux
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Git' %}">Git</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Linux' %}">Linux</a>
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='运维' %}">运维</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Bug解决
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='Bug解决' %}">Bug解决</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  学习笔记
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'blog:post_list' slug='学习笔记' %}">学习笔记</a>
+                  <a class="dropdown-item" href="{% url 'blog:admin' %}">Think & Write</a>
+                </div>
+              </li>
+              <li>
+                <form class="form-inline" style="margin-left:80px">
+                <input class="form-control mr-sm-2 border border-secondary" type="search" placeholder="搜索（待开发）" aria-label="Search">
+                <button class="btn btn-outline-secondary border border-secondary" type="submit">全站搜索</button>
+              </form>
+              </li>
+            </ul>
+          </div>
+    </nav>
+</div>
+<!--导航栏结束-->
+<!-- 主页面开始 -->
+<div class="container" style="margin-top:58px;dispaly:flex;">
+  <div class="container w-75 p-0" style="background-color: #fff7f7;display:inline-block;">
+    {% block showpage %}{# 文章列表或者文章详情显示区域 #}
+    {% endblock %}
+  {% block page %}{# 分页显示区域 #}
+  <div class="" style="margin-top:-20px;margin-left:660px;">
+    {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}" style="">上一页</a>
+    {% endif %}
+    <span style="color:#24c2cd;">
+      Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+    </span>
+    {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}" style="margin-left:25px;margin-right:-45px;">下一页</a>
+    {% endif %}
+  </div>
+  {% endblock %}
+  </div>
+  <div class="container w-25 p-3" style="background-color:#fff7f7;display:inline-block;float:right;">
+  {% include 'blog/post-sidebar.html' %}
+  </div>
+</div>
+<!-- 主页面结束 -->
+<div class="container w-100" style="display:flex;">
+  <div class="w-100 p-3" style="background-color:#fff7f7;">
+    {% include 'blog/footer.html' %}{# 网页底部信息显示 #}
+  </div>
+</div>
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
