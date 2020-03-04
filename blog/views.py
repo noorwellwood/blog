@@ -27,6 +27,7 @@ def post_home(request):
     return render(request,'blog/post-list.html',({'posts':posts,'post_news':post_news,'post_ranges':post_ranges,'daytime':daytime}))
 
 def post_list(request,slug=None):
+    daytime=(datetime.datetime.now()-datetime.datetime(2020,3,4)).days
     posts = Post.objects.filter(status='published',slug__title=slug)  # list-page所有文章显示
     post_news = Post.objects.filter(status='published')[:3]  # 最新文章筛选
     post_ranges = Post.objects.filter(status='published').order_by('-total_views')[:3]  # 点击排行文章筛选
@@ -41,14 +42,15 @@ def post_list(request,slug=None):
             return HttpResponse('找不到页面的内容')
         except EmptyPage:  # 如果请求的页数不在合法的页数范围内，返回结果的最后一页
             posts = paginator.page(paginator.num_pages)
-    return render(request,'blog/post-list.html',({'posts':posts,'post_news':post_news,'post_ranges':post_ranges}))
+    return render(request,'blog/post-list.html',({'posts':posts,'post_news':post_news,'post_ranges':post_ranges,'daytime':daytime}))
 
 def post_detail(request,id=None,):
+    daytime=(datetime.datetime.now()-datetime.datetime(2020,3,4)).days 
     post_news = Post.objects.filter(status='published')[:3]  # 最新文章筛选
     post_ranges = Post.objects.filter(status='published').order_by('-total_views')[:3]  # 点击排行文章筛选
     post = get_object_or_404(Post, id=id)  # 文章详情，id为该文章的ID
     post.total_views += 1  # 浏览量统计，每点击该文章详情一次，就增1
     post.save(update_fields=['total_views'])  # 浏览量每次增加后，只保存浏览量，优化性能
-    return render(request,'blog/post-detail.html',({'post':post,'post_news':post_news,'post_ranges':post_ranges}))
+    return render(request,'blog/post-detail.html',({'post':post,'post_news':post_news,'post_ranges':post_ranges,'daytime':daytime}))
 
 # Create your views here.
