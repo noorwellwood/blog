@@ -9,7 +9,7 @@ def admin(request):
     return render(request,admin.site.urls)
 
 def post_home(request):
-    daytime=(datetime.datetime.now()-datetime.datetime(2020,1,3)).days
+    daytime=(datetime.datetime.now()-datetime.datetime(2020,3,4)).days
     posts = Post.objects.filter(status='published')  # home-page所有文章显示
     post_news = Post.objects.filter(status='published')[:3]  # 最新文章筛选
     post_ranges = Post.objects.filter(status='published').order_by('-total_views')[:3]  # 点击排行文章筛选
